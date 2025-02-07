@@ -1,0 +1,121 @@
+@import '../../../styles/variables.scss';
+
+.track-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    border-radius: 5px;
+    gap: 15px;
+    
+    .album-track {
+        width: auto;
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        user-select: none;
+        width: 80%;
+
+        .index {
+            display: flex;
+            width: 45px;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #999;
+
+            .play {
+                width: 17px;
+            }
+
+            .pause {
+                width: 17px;
+            }
+        }
+
+        .album-image {
+            width: 40px;
+            height: 40px;
+        }
+
+        .track-artist {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-weight: 300;
+            width: 80%;
+            margin-left: 15px;
+
+            .track {
+                font-size: 15px;
+                margin-bottom: 5px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                width: 100%;
+            }
+
+            .artist {
+                font-size: 13px;
+                color: #999;
+                display: flex;
+                gap: 8px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                width: 100%;
+
+                .explicit {
+                    width: 15px;
+                    min-width: 15px;
+                    border-radius: 2px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: #999;
+                    font-weight: 500;
+                    font-size: 8px;
+                    color: $spotify-black;
+                }
+            }
+        }
+    }
+
+    .time-action-wrapper {
+        display: flex;
+        align-items: center;
+        color: #999;
+        font-size: 15px;
+        margin-right: 5px;
+
+        .icon {
+            width: 25px;
+            margin-left: 5px;
+            opacity: 0;
+        }
+    }
+
+    &:hover {
+        background-color: #333;
+        cursor: pointer;
+
+        .album-track {
+            .track-artist {
+                .artist {
+                    color: $spotify-white;
+                }
+            }
+        }
+
+        .time-action-wrapper {
+            .icon {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.track-active {
+    color: $spotify-green;
+}

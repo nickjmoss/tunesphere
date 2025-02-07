@@ -1,0 +1,140 @@
+@import '../../../styles/variables.scss';
+
+.primary {
+    background-color: $spotify-green;
+    color: $spotify-white;
+    border: none;
+    border-radius: 500px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        background-color: #1ed760;
+    }
+    &:active {
+        background-color: #1aa34a;
+    }
+    &:disabled {
+        background-color: #999;
+        cursor: not-allowed;
+    }
+}
+
+.outlined {
+    background-color: transparent;
+    color: $spotify-white;
+    border: 1px solid $spotify-white;
+    border-radius: 500px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    
+    &:hover {
+        background-color: $spotify-white;
+        color: $spotify-black;
+    }
+    &:active {
+        background-color: $spotify-white;
+    }
+    &:disabled {
+        background-color: #999;
+        cursor: not-allowed;
+    }
+}
+
+.text {
+    background-color: transparent;
+    color: darken($spotify-white, 30);
+    border: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &::after {
+        content: '';
+        display: block;
+        opacity: 0;
+        height: 2px;
+        margin-top: 5px;
+        background-color: $spotify-white;
+        transition: all 0.1s ease-in-out;
+    }
+
+    &:hover {
+        color: $spotify-white;
+    }
+
+    &:disabled {
+        background-color: #999;
+        cursor: not-allowed;
+    }
+}
+
+.active-text {
+    color: $spotify-white;
+    &::after {
+        opacity: 1;
+    }
+}
+
+.link {
+    background-color: transparent;
+    color: $spotify-white;
+    border: none;
+    border-radius: 500px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &::after {
+        content: '';
+        display: block;
+        opacity: 0;
+        height: 3px;
+        margin-top: 2px;
+        background-color: $spotify-white;
+        transition: all 0.1s ease-in-out;
+    }
+
+    &:hover {
+        &::after {
+            opacity: 1;
+        }
+    }
+}
+
+.xl {
+    padding: 1.5rem 3rem;
+    font-size: 1.2rem;
+}
+
+.lg {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+}
+
+.md {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8rem;
+}
+
+.sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+}
+
+.circle {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    padding: 8px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

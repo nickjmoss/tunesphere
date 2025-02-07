@@ -1,0 +1,84 @@
+@import '../../../styles/variables.scss';
+
+.artist-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    
+    .artist-image {
+        display: flex;
+        align-items: center;
+        width: 50%;
+        flex-grow: 1;
+        user-select: none;
+        
+
+        .index {
+            width: 45px;
+            display: flex;
+            justify-content: center;
+            font-size: 16px;
+            color: #999;
+        }
+
+        .image {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+        }
+
+        .artist {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 15px;
+
+            .artist {
+                font-size: 13px;
+                color: #999;
+            }
+        }
+    }
+
+    .action-wrapper {
+        display: flex;
+        align-items: center;
+        color: #999;
+        font-size: 15px;
+        margin-right: 5px;
+
+        .icon {
+            width: 25px;
+            margin-left: 5px;
+            opacity: 0;
+        }
+    }
+
+    &:hover {
+        background-color: #333;
+        cursor: pointer;
+
+        .album-track {
+            .track-artist {
+                .artist {
+                    color: $spotify-white;
+                }
+            }
+        }
+
+        .action-wrapper {
+            .icon {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.track-active {
+    color: $spotify-green;
+}

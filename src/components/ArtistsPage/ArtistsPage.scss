@@ -1,0 +1,28 @@
+@import '../../styles/variables.scss';
+
+.artists-page-wrapper {
+    margin: 50px 150px;
+
+    .main {
+        margin-bottom: 25px;
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+    
+            .filters {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+    }
+}

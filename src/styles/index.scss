@@ -1,0 +1,33 @@
+@import './variables.scss';
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box !important;
+    font-family: sans-serif;
+	color: $spotify-white;
+}
+
+body {
+    background-color: $spotify-black-light;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	overflow-y: scroll;
+}
+
+canvas {
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}

@@ -1,0 +1,114 @@
+@import './styles/variables.scss';
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.main {
+    margin: 50px 150px;
+    display: flex;
+    flex: 1;
+}
+.menu-bar {
+    background-color: $spotify-black;
+    padding: 20px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.logo img {
+    height: 30px;
+    width: 30px;
+}
+.fixed-menu {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $spotify-black;
+    padding: 10px 10px;
+    border-radius: 30px;
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5);
+
+    .menu-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 15px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        .icon {
+            width: 18px;
+            margin-bottom: 5px;
+        }
+
+        .name {
+            font-size: 11px;
+        }
+    }
+
+    .for-you-button-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+
+        .for-you-button {
+            display: flex;
+            position: absolute;
+            align-items: center;
+            justify-content: center;
+            background-color: $spotify-green;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            transition: all 0.2s ease-in-out;
+    
+            &:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+    
+            .for-you-icon {
+                width: 25px;
+                fill: $spotify-black;
+            }
+        }
+    }
+
+
+    .divider {
+        width: 1px;
+        height: 32px;
+        background-color: $spotify-white;
+        margin: 0 10px;
+    }
+}
+.active {
+    fill: $spotify-green;
+    color: $spotify-green;
+}
+
+.active-for-you {
+    fill: $spotify-white !important;
+}

@@ -1,0 +1,29 @@
+{
+    "name": "tunesphere-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "ts-node-dev --respawn index.ts",
+        "build": "tsc",
+        "build:test": "tsc --noEmit"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@fastify/static": "^6.11.0",
+        "axios": "^1.6.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "fastify": "^4.22.2",
+        "nodemon": "^3.0.1",
+        "pm2": "^5.3.0",
+        "prisma": "^5.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.5.9",
+        "ts-node-dev": "^2.0.0",
+        "typescript": "^5.2.2"
+    }
+}

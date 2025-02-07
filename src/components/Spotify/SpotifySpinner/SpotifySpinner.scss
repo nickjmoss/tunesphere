@@ -1,0 +1,19 @@
+@import '../../../styles/variables.scss';
+
+.spinner {
+    width: 25px;
+    height: 25px;
+    border: 3px solid $spotify-green;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

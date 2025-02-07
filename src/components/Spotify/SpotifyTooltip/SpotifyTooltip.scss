@@ -1,0 +1,35 @@
+@import '../../../styles/variables.scss';
+
+.tooltip-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .tooltip {
+        position: absolute;
+        left: 50%;
+        bottom: 130%;
+        transform: translateX(-50%);
+        width: fit-content;
+        text-wrap: nowrap;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #000000;
+        color: #ffffff;
+        font-size: 14px;
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+        z-index: 1;
+    }
+
+    &:hover {
+        .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}

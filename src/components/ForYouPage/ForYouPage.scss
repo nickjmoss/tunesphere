@@ -1,0 +1,209 @@
+@import '../../styles/variables.scss';
+
+.for-you-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    position: relative;
+
+    .for-you-player {
+        width: 1000px;
+        border-radius: 15px;
+        padding: 20px 50px;
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        z-index: 1;
+        box-shadow: 0 10px 14px rgba(0, 0, 0, 0.7);
+
+        .for-you-title {
+            font-size: 14px;
+            color: $spotify-gray;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .image-track-artist {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+
+            .for-you-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .for-you-info {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                height: 100%;
+                margin-left: 30px;
+                width: 100%;
+
+                .track-action-wrapper {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+
+                    .for-you-track {
+                        font-size: 25px;
+                        font-weight: bold;
+                        display: flex;
+                        align-items: flex-end;
+                        gap: 10px;
+
+                        .play-bars {
+                            width: 10px;
+                        }
+                    }
+
+                    .action-wrapper {
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+
+                        .action-button {
+                            .like-icon {
+                                width: 20px;
+                            }
+
+                            .like-icon-checked {
+                                width: 20px;
+                                fill: $spotify-green;
+                            }
+                            
+                            &:hover {
+                                .stroke {
+                                    stroke: $spotify-green;
+                                }
+    
+                                .fill {
+                                    fill: $spotify-green;
+                                }
+    
+                                .both {
+                                    fill: $spotify-green;
+                                    stroke: $spotify-green;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+
+                .for-you-artist {
+                    font-size: 20px;
+                    color: #999;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    .explicit {
+                        width: 15px;
+                        height: 15px;
+                        border-radius: 2px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: #999;
+                        font-weight: 500;
+                        font-size: 8px;
+                        color: $spotify-black;
+                    }
+                }
+            }
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: #999;
+        }
+
+        .controls-wrapper {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            margin-top: 30px;
+            position: relative;
+
+            .controls {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 25%;
+
+                .control {
+                    .play-pause {
+                        width: 73px;
+                        fill: $spotify-green;
+                        transition: all 0.2s ease-in-out;
+                        border-radius: 50%;
+
+                        &:hover {
+                            cursor: pointer;
+                            transform: scaleX(1.1) scaleY(1.1);
+                            fill: lighten($spotify-green, $amount: 5%);
+                        }
+                    }
+
+                    .icon {
+                        width: 50px;
+                        border-radius: 50%;
+                        padding: 10px;
+                        transition: all 0.2s ease-in-out;
+                        fill: darken($spotify-white, $amount: 30%);
+
+                        &:hover {
+                            background-color: rgba($color: #ffffff, $alpha: 0.2);
+                            cursor: pointer;
+                            fill: $spotify-white;
+                        }
+                    }
+                }
+            }
+
+            .settings-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+                z-index: 1;
+
+                .settings {
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    fill: transparent;
+                    stroke: $spotify-white;
+                    padding: 5px;
+                    border-radius: 50%;
+                    transition: all 0.2s ease-in-out;
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: $spotify-white;
+                        fill: $spotify-green;
+                        stroke: $spotify-green;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
