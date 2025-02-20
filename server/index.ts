@@ -3,6 +3,7 @@ import fastifyStatic from '@fastify/static';
 import path from 'path';
 import dotenv from 'dotenv';
 import axios from 'axios';
+import crypto from 'crypto';
 dotenv.config();
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -36,30 +37,26 @@ const server = fastify({
     logger: envToLogger[NODE_ENV] ?? true,
 });
 
-// TODO: Clean this up and add error handling
+const stateKey = 'spotify_auth_state';
 
+// TODO: Clean this up and add error handling
 const generateRandomString = (length: number) => {
-    let text = '';
-    const possible =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < length; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
+    return crypto.randomBytes(60).toString('hex').slice(0, length);
 };
 
 // Login to Spotify via their auth URL
 server.get('/api/login', async (request, reply) => {
-    var state = generateRandomString(16);
-    var scope =
+    const state = generateRandomString(16);
+    reply.header('Set-Cookie', `${stateKey}=${state}; Path=/`);
+    const scope =
         'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public user-library-read user-library-modify playlist-modify-private user-read-playback-state user-read-currently-playing user-modify-playback-state';
 
     const params = new URLSearchParams({
         response_type: 'code',
         client_id: CLIENT_ID,
-        scope: scope,
+        scope,
         redirect_uri: REDIRECT_URL,
-        state: state,
+        state,
     } as Record<string, string>);
 
     reply.redirect(
@@ -81,13 +78,21 @@ server.get(
     ) => {
         const code = req.query.code || null;
         const state = req.query.state || null;
+        // get stateKey cookie
+        const storedState = req.headers.cookie
+            ?.split(';')
+            .find((c) => c.trim().startsWith(stateKey))
+            ?.split('=')[1];
 
-        if (state === null) {
+        if (state === null || state !== storedState) {
+            console.log('state mismatch');
             const params = new URLSearchParams({
                 error: 'state_mismatch',
             } as Record<string, string>);
             reply.redirect('/#' + params.toString());
         } else {
+            // clear stateKey cookie
+            reply.header('Set-Cookie', `${stateKey}=; Path=/`);
             // @ts-ignore
             const authString: string = new Buffer.from(
                 CLIENT_ID + ':' + CLIENT_SECRET,
@@ -103,6 +108,7 @@ server.get(
                     'content-type': 'application/x-www-form-urlencoded',
                     Authorization: 'Basic ' + authString,
                 },
+                json: true,
             };
 
             const { data } = await axios.post(
