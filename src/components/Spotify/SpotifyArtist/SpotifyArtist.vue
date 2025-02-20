@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ListenOnSpotify from '../ListenOnSpotify/ListenOnSpotify.vue';
+
 // import { EllipsisHorizontalIcon } from '@heroicons/vue/24/solid';
 defineProps({
     artist: {
@@ -30,7 +32,10 @@ defineProps({
             </div>
         </div>
         <div class="action-wrapper">
-            <!-- <EllipsisHorizontalIcon class="icon" /> -->
+            <ListenOnSpotify
+                class="listen"
+                :href="artist?.external_urls?.spotify"
+            />
         </div>
     </div>
 </template>

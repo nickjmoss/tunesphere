@@ -7,6 +7,7 @@ import {
 import { ref } from 'vue';
 import { useSpotifyStore } from '../../../stores/Spotify';
 import { Artist } from '../../../stores/Spotify/types';
+import ListenOnSpotify from '../ListenOnSpotify/ListenOnSpotify.vue';
 const spotifyStore = useSpotifyStore();
 defineProps({
     track: {
@@ -107,8 +108,11 @@ const handleEnded = () => {
             </div>
         </div>
         <div class="time-action-wrapper">
+            <ListenOnSpotify
+                class="listen"
+                :href="track?.external_urls?.spotify"
+            />
             {{ formatDuration(track?.duration_ms) }}
-            <!-- <EllipsisHorizontalIcon class="icon" /> -->
         </div>
         <audio
             @ended="handleEnded"

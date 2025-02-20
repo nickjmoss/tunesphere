@@ -1,34 +1,26 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
-import SpotifyButton from '../Spotify/SpotifyButton/SpotifyButton.vue';
 import SpotifyBarsIcon from '../Spotify/SpotifyBarsIcon/SpotifyBarsIcon.vue';
 import SpotifyTooltip from '../Spotify/SpotifyTooltip/SpotifyTooltip.vue';
 import SpotifyPlaylistModal from '../Spotify/SpotifyPlaylistModal/SpotifyPlaylistModal.vue';
 import SpotifyForYouPopover from '../Spotify/SpotifyForYouPopover/SpotifyForYouPopover.vue';
-import SpotifyLogo from '../Spotify/SpotifyLogo/SpotifyLogo.vue';
 import { useForYouStore } from '../../stores/Spotify/ForYou';
 import {
     ForwardIcon,
     BackwardIcon,
     PlayCircleIcon,
     PauseCircleIcon,
-    PlusIcon,
-    HeartIcon as HeartIconSolid,
     Cog8ToothIcon,
 } from '@heroicons/vue/24/solid';
-import { HeartIcon as HeartIconOutline } from '@heroicons/vue/24/outline';
 import SpotifyLoader from '../Spotify/SpotifyLoader/SpotifyLoader.vue';
 import { useFilterStore } from '../../stores/Spotify/ForYou/Filters';
+import ListenOnSpotify from '../Spotify/ListenOnSpotify/ListenOnSpotify.vue';
 
 const forYouStore = useForYouStore();
 const filterStore = useFilterStore();
 
 onMounted(forYouStore.initialize);
 onUnmounted(forYouStore.destroy);
-
-const handleListenInSpotify = () => {
-    window.open(forYouStore.currentForYouTrack.external_urls.spotify);
-};
 </script>
 
 <template>
@@ -38,7 +30,17 @@ const handleListenInSpotify = () => {
             <SpotifyLoader />
         </div>
         <div class="for-you-player" v-else>
-            <div class="for-you-title">For You Song Recommendations</div>
+            <div class="for-you-title">
+                <div>For You Song Recommendations</div>
+                <ListenOnSpotify
+                    v-if="
+                        forYouStore?.currentForYouTrack?.external_urls?.spotify
+                    "
+                    :href="
+                        forYouStore?.currentForYouTrack?.external_urls?.spotify
+                    "
+                />
+            </div>
             <div class="image-track-artist">
                 <img
                     id="for-you-image"
@@ -62,47 +64,28 @@ const handleListenInSpotify = () => {
                             </div>
                         </div>
                         <div class="action-wrapper">
-                            <SpotifyTooltip message="Add to Liked Songs">
-                                <SpotifyButton
-                                    variant="outlined"
-                                    circle
-                                    button-class="action-button"
-                                    @click="forYouStore.handleLike"
-                                >
-                                    <HeartIconOutline
+                            <SpotifyTooltip
+                                :message="
+                                    !forYouStore.currentForYouTrack?.is_liked
+                                        ? 'Add to Liked Songs'
+                                        : 'Add to Playlist'
+                                "
+                            >
+                                <div class="like-button">
+                                    <img
+                                        src="/assets/like-icon-like.svg"
                                         v-if="
                                             !forYouStore.currentForYouTrack
                                                 .is_liked
                                         "
-                                        class="like-icon stroke"
+                                        @click="forYouStore.likeSong"
                                     />
-                                    <HeartIconSolid
+                                    <img
+                                        src="/assets/like-icon-liked.svg"
                                         v-else
-                                        class="like-icon-checked"
+                                        @click="forYouStore.unlikeSong"
                                     />
-                                </SpotifyButton>
-                            </SpotifyTooltip>
-                            <SpotifyTooltip message="Add to Playlist">
-                                <SpotifyButton
-                                    variant="outlined"
-                                    circle
-                                    button-class="action-button"
-                                    @click="
-                                        forYouStore.setPlaylistModalOpen(true)
-                                    "
-                                >
-                                    <PlusIcon class="like-icon both" />
-                                </SpotifyButton>
-                            </SpotifyTooltip>
-                            <SpotifyTooltip message="Listen on Spotify">
-                                <SpotifyButton
-                                    variant="outlined"
-                                    circle
-                                    button-class="action-button"
-                                    @click="handleListenInSpotify"
-                                >
-                                    <SpotifyLogo class="both" />
-                                </SpotifyButton>
+                                </div>
                             </SpotifyTooltip>
                         </div>
                     </div>

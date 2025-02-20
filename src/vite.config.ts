@@ -7,7 +7,7 @@ export default defineConfig({
     build: {
         outDir: '../dist/frontend-build',
     },
-    publicDir: '../public',
+    publicDir: './public',
     appType: 'spa',
     root: '.',
     server: {

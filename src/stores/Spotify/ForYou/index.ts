@@ -75,13 +75,11 @@ export const useForYouStore = defineStore('ForYouStore', {
             document.addEventListener('keydown', this.handleKeys);
 
             // In case the user has never interacted with the page
-            // if (!navigator.userActivation.hasBeenActive) {
-            //     this.setForYouIsPlaying(false);
-            // } else {
-            //     this.setForYouIsPlaying(true);
-            // }
-
-            this.setForYouIsPlaying(true);
+            if (!navigator.userActivation.hasBeenActive) {
+                this.setForYouIsPlaying(false);
+            } else {
+                this.setForYouIsPlaying(true);
+            }
 
             navigator.mediaSession.setActionHandler('play', () => {
                 this.handlePlayPause();

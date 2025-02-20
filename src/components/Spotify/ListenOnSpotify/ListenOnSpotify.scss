@@ -1,0 +1,29 @@
+@import "../../../styles/variables.scss";
+
+.listen-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba($color: $spotify-white, $alpha: 0.4);
+    padding: 5px 10px;
+    border-radius: 15px;
+    transition: border-color 0.2s;
+
+    .logo {
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    div {
+        font-size: 14px;
+        white-space: nowrap;
+        display: flex;
+    }
+
+    &:hover {
+        cursor: pointer;
+        border: 1px solid $spotify-white;
+    }
+}
