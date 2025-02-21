@@ -52,7 +52,7 @@ onMounted(async () => {
                 Continue with Spotify
             </SpotifyButton>
             <div class="subtext">
-                Read our
+                By continuing, you agree to our
                 <span @click="() => (showModal = 'privacy')">
                     Privacy Policy
                 </span>
