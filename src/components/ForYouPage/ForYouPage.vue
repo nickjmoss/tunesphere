@@ -32,14 +32,6 @@ onUnmounted(forYouStore.destroy);
         <div class="for-you-player" v-else>
             <div class="for-you-title">
                 <div>For You Song Recommendations</div>
-                <ListenOnSpotify
-                    v-if="
-                        forYouStore?.currentForYouTrack?.external_urls?.spotify
-                    "
-                    :href="
-                        forYouStore?.currentForYouTrack?.external_urls?.spotify
-                    "
-                />
             </div>
             <div class="image-track-artist">
                 <img
@@ -64,6 +56,16 @@ onUnmounted(forYouStore.destroy);
                             </div>
                         </div>
                         <div class="action-wrapper">
+                            <ListenOnSpotify
+                                v-if="
+                                    forYouStore?.currentForYouTrack
+                                        ?.external_urls?.spotify
+                                "
+                                :href="
+                                    forYouStore?.currentForYouTrack
+                                        ?.external_urls?.spotify
+                                "
+                            />
                             <SpotifyTooltip
                                 :message="
                                     !forYouStore.currentForYouTrack?.is_liked
@@ -83,7 +85,12 @@ onUnmounted(forYouStore.destroy);
                                     <img
                                         src="/assets/like-icon-liked.svg"
                                         v-else
-                                        @click="forYouStore.unlikeSong"
+                                        @click="
+                                            () =>
+                                                forYouStore.setPlaylistModalOpen(
+                                                    true,
+                                                )
+                                        "
                                     />
                                 </div>
                             </SpotifyTooltip>

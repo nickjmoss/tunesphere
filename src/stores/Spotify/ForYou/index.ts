@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { defineStore } from 'pinia';
 import { Artist, ForYouTrack, Playlist } from '../types';
 // @ts-expect-error old npm package
@@ -397,11 +397,11 @@ export const useForYouStore = defineStore('ForYouStore', {
 
             this.setPlaylists(playlists);
         },
-        async addSongToPlaylist() {
+        async addSongToPlaylist(removeFromLikedSongs: boolean) {
             const spotifyStore = useSpotifyStore();
             try {
-                const requests = this.addToPlaylists.map(
-                    (playlistId: string) => {
+                const requests: Array<Promise<AxiosResponse | void>> =
+                    this.addToPlaylists.map((playlistId: string) => {
                         return axios.post(
                             `${spotifyStore.BASE_URL}/playlists/${playlistId}/tracks`,
                             {
@@ -415,8 +415,11 @@ export const useForYouStore = defineStore('ForYouStore', {
                                 },
                             },
                         );
-                    },
-                );
+                    });
+
+                if (removeFromLikedSongs) {
+                    requests.push(this.unlikeSong());
+                }
 
                 await Promise.all(requests);
             } catch (err) {

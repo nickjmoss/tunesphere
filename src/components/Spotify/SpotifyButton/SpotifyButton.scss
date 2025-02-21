@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import "../../../styles/variables.scss";
 
 .primary {
     background-color: $spotify-green;
@@ -32,7 +32,7 @@
     letter-spacing: 0.1rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    
+
     &:hover {
         background-color: $spotify-white;
         color: $spotify-black;
@@ -55,11 +55,17 @@
     letter-spacing: 0.1rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    position: relative;
 
     &::after {
-        content: '';
+        content: "";
         display: block;
         opacity: 0;
+        width: calc(100% - 1rem);
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        bottom: 0;
         height: 2px;
         margin-top: 5px;
         background-color: $spotify-white;
@@ -91,12 +97,18 @@
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    position: relative;
 
     &::after {
-        content: '';
-        display: block;
+        content: "";
         opacity: 0;
         height: 3px;
+        width: calc(100% - 1rem);
+        left: 50%;
+        transform: translate(-50%);
+        width: 100%;
+        bottom: 0;
+        position: absolute;
         margin-top: 2px;
         background-color: $spotify-white;
         transition: all 0.1s ease-in-out;
@@ -137,4 +149,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }

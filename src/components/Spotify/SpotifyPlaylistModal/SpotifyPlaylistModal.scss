@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import "../../../styles/variables.scss";
 
 .overlay {
     position: fixed;
@@ -84,6 +84,47 @@
                 height: 550px;
                 overflow-y: auto;
 
+                .saved-header {
+                    display: flex;
+                    width: 100%;
+                    padding: 10px;
+                    margin-top: 5px;
+                    color: $spotify-gray;
+                    font-weight: 600;
+                }
+
+                .saved-wrapper {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px;
+                    border-radius: 5px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.1);
+                    }
+
+                    .liked-background {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 15px;
+
+                        img {
+                            object-fit: cover;
+                            border-radius: 5px;
+                            width: 100%;
+                            width: 50px;
+                            height: 50px;
+                        }
+
+                        div {
+                            font-weight: 600;
+                        }
+                    }
+                }
+
                 .playlist-wrapper {
                     display: flex;
                     align-items: center;
@@ -92,70 +133,58 @@
                     padding: 10px;
                     border-radius: 5px;
                     cursor: pointer;
-    
+
                     &:hover {
                         background-color: rgba(255, 255, 255, 0.1);
-    
+
                         .playlist-actions {
                             .icon {
                                 opacity: 1;
                             }
                         }
                     }
-    
+
                     .image-info {
                         display: flex;
                         align-items: center;
                         gap: 15px;
-    
+
                         .playlist-image {
                             width: 50px;
                             height: 50px;
                             overflow: hidden;
-        
+                            border-radius: 5px;
+
                             img {
                                 width: 100%;
                                 height: 100%;
                                 object-fit: cover;
                             }
                         }
-        
+
                         .playlist-info {
                             display: flex;
                             flex-direction: column;
                             justify-content: center;
                             gap: 5px;
-        
+
                             .playlist-name {
                                 font-size: 16px;
                                 font-weight: 600;
                             }
                         }
                     }
-    
-    
+
                     .playlist-actions {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                         gap: 10px;
-    
-                        .icon {
-                            width: 25px;
-                            height: 25px;
-                            opacity: 0;
-                        }
-                        
-                        .checked-icon {
-                            width: 25px;
-                            height: 25px;
-                            fill: $spotify-green;
-                        }
                     }
                 }
             }
         }
-        
+
         .modal-footer {
             display: flex;
             align-items: center;
@@ -169,5 +198,18 @@
 .divider {
     width: 100%;
     height: 1px;
+    margin: 5px 0;
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    opacity: 0;
+}
+
+.checked-icon {
+    width: 25px;
+    height: 25px;
+    fill: $spotify-green;
 }

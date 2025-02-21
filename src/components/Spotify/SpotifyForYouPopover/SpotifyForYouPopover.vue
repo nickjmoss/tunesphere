@@ -110,7 +110,6 @@ const radioOptions = [
                 <div class="popover-title">
                     Give me recommendations based on:
                 </div>
-                <div class="divider" />
                 <div
                     v-for="radioOption in radioOptions"
                     :key="radioOption.id"
@@ -148,7 +147,6 @@ const radioOptions = [
                         />
                     </div>
                 </div>
-                <div class="divider" />
                 <div class="footer">
                     <SpotifyButton
                         variant="outlined"

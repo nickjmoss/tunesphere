@@ -1,31 +1,99 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 .login-wrapper {
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: $spotify-black;
+    position: relative;
 
-    .welcome-wrapper {
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+
+        .end-user-modal {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            z-index: 1;
+            background-color: $spotify-black;
+            overflow-y: auto;
+            height: 600px;
+
+            .header {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                padding: 20px;
+
+                .icon {
+                    width: 20px;
+                    cursor: pointer;
+                }
+            }
+
+            .text {
+                white-space: pre-line;
+                padding: 20px 50px;
+            }
+        }
+    }
+
+    .login {
+        width: 40%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-bottom: 50px;
+        padding: 0 5rem;
 
         .title {
-            font-size: 50px;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
 
-        .description {
-            font-size: 20px;
-            font-weight: 400;
+        .subtitle {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
             text-align: center;
+            color: $spotify-gray;
+        }
+
+        .subtext {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 2rem;
+            color: $spotify-gray;
+
+            span {
+                color: rgba($color: $spotify-white, $alpha: 0.7);
+                text-decoration: underline;
+                cursor: pointer;
+
+                &:hover {
+                    color: $spotify-white;
+                }
+            }
+        }
+    }
+
+    .image {
+        width: 60%;
+        background-color: $spotify-black;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
 }

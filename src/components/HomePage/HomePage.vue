@@ -9,6 +9,7 @@ import SpotifyBarsIcon from '../Spotify/SpotifyBarsIcon/SpotifyBarsIcon.vue';
 import SpotifySpinner from '../Spotify/SpotifySpinner/SpotifySpinner.vue';
 import { PlayCircleIcon, PauseCircleIcon } from '@heroicons/vue/24/solid';
 import { onMounted } from 'vue';
+import ListenOnSpotify from '../Spotify/ListenOnSpotify/ListenOnSpotify.vue';
 const spotifyStore = useSpotifyStore();
 const playbackStore = usePlaybackStore();
 
@@ -53,78 +54,88 @@ const handleClick = () => {
                         </div>
                         <div class="profile-info">
                             <div class="stat">
-                                <span class="stat-num">{{
-                                    spotifyStore.me.followers.total
-                                }}</span>
+                                <span class="stat-num">
+                                    {{ spotifyStore.me.followers.total }}
+                                </span>
                                 <span class="stat-desc">Followers</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-num">{{
-                                    spotifyStore.me.followingTotal
-                                }}</span>
+                                <span class="stat-num">
+                                    {{ spotifyStore.me.followingTotal }}
+                                </span>
                                 <span class="stat-desc">Following</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-num">{{
-                                    spotifyStore.me.playlistsTotal
-                                }}</span>
+                                <span class="stat-num">
+                                    {{ spotifyStore.me.playlistsTotal }}
+                                </span>
                                 <span class="stat-desc">Playlists</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div
-                    class="currently-playing-wrapper"
-                    v-if="!playbackStore.loading"
-                >
-                    <div class="album">
-                        <img
-                            :src="
-                                playbackStore.noPlayback
-                                    ? 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Spotify_App_Logo.svg/240px-Spotify_App_Logo.svg.png'
-                                    : playbackStore.getAlbumArt
-                            "
-                            alt="Album Artwork"
-                        />
-                        <div
-                            class="track-info"
-                            v-if="!playbackStore.noPlayback"
-                        >
-                            <div class="track-name">
-                                {{ playbackStore.getTrackName }}
+                <div class="playback">
+                    <div class="header">Currently Playing</div>
+                    <div
+                        class="currently-playing-wrapper"
+                        v-if="!playbackStore.loading"
+                    >
+                        <div class="album">
+                            <img
+                                :src="
+                                    playbackStore.noPlayback
+                                        ? '/assets/spotify-logo-white.svg'
+                                        : playbackStore.getAlbumArt
+                                "
+                                alt="Album Artwork"
+                            />
+                            <div
+                                class="track-info"
+                                v-if="!playbackStore.noPlayback"
+                            >
+                                <div class="track-name">
+                                    {{ playbackStore.getTrackName }}
+                                    <div
+                                        class="play-bars"
+                                        v-if="playbackStore.isPlaying"
+                                    >
+                                        <SpotifyBarsIcon />
+                                    </div>
+                                </div>
+                                <div class="track-artist">
+                                    {{ playbackStore.getArtistName }}
+                                </div>
                                 <div
-                                    class="play-bars"
-                                    v-if="playbackStore.isPlaying"
+                                    class="device"
+                                    v-if="playbackStore.getDeviceName"
                                 >
-                                    <SpotifyBarsIcon />
+                                    {{ playbackStore.getDeviceName }}
                                 </div>
                             </div>
-                            <div class="track-artist">
-                                {{ playbackStore.getArtistName }}
-                            </div>
-                            <div
-                                class="device"
-                                v-if="playbackStore.getDeviceName"
-                            >
-                                {{ playbackStore.getDeviceName }}
+                            <div class="no-playback" v-else>
+                                Oops! Looks like there's no recent playback
+                                history. Play something inside of Spotify to see
+                                it here.
                             </div>
                         </div>
-                        <div class="no-playback" v-else>
-                            Oops! Looks like there's no recent playback history.
-                            Play something inside of Spotify to see it here.
+                        <div
+                            class="listen-play"
+                            v-if="!playbackStore.noPlayback"
+                        >
+                            <ListenOnSpotify
+                                :href="playbackStore.getTrackUrl"
+                            />
+                            <PlayCircleIcon
+                                class="play-pause"
+                                v-if="!playbackStore.isPlaying"
+                                @click="playbackStore.playPlayback"
+                            />
+                            <PauseCircleIcon
+                                class="play-pause"
+                                v-else
+                                @click="playbackStore.pausePlayback"
+                            />
                         </div>
-                    </div>
-                    <div v-if="!playbackStore.noPlayback">
-                        <PlayCircleIcon
-                            class="play-pause"
-                            v-if="!playbackStore.isPlaying"
-                            @click="playbackStore.playPlayback"
-                        />
-                        <PauseCircleIcon
-                            class="play-pause"
-                            v-else
-                            @click="playbackStore.pausePlayback"
-                        />
                     </div>
                 </div>
                 <div v-if="playbackStore.loading" class="playback-loader">

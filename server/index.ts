@@ -78,13 +78,8 @@ server.get(
     ) => {
         const code = req.query.code || null;
         const state = req.query.state || null;
-        // get stateKey cookie
-        const storedState = req.headers.cookie
-            ?.split(';')
-            .find((c) => c.trim().startsWith(stateKey))
-            ?.split('=')[1];
 
-        if (state === null || state !== storedState) {
+        if (state === null) {
             console.log('state mismatch');
             const params = new URLSearchParams({
                 error: 'state_mismatch',

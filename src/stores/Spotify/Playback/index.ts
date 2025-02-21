@@ -25,6 +25,9 @@ export const usePlaybackStore = defineStore('PlaybackStore', {
         getDeviceName(state) {
             return state.playback.device?.name;
         },
+        getTrackUrl(state) {
+            return state.playback.item?.external_urls?.spotify;
+        },
     },
     actions: {
         async initialize() {
