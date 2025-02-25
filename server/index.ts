@@ -49,7 +49,7 @@ server.get('/api/login', async (request, reply) => {
     const state = generateRandomString(16);
     reply.header('Set-Cookie', `${stateKey}=${state}; Path=/`);
     const scope =
-        'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public user-library-read user-library-modify playlist-modify-private user-read-playback-state user-read-currently-playing user-modify-playback-state';
+        'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read playlist-read-private playlist-read-collaborative playlist-modify-public user-library-read user-library-modify playlist-modify-private user-read-playback-state user-read-currently-playing user-modify-playback-state';
 
     const params = new URLSearchParams({
         response_type: 'code',
